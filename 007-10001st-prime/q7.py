@@ -1,15 +1,24 @@
-n = 150000
-primes = [True]*n
-primes[0] = False
-primes[1] = False
-list_of_primes = [2]
+#!/bin/python3
 
-for num in range(3, n+1, 2):
-    if primes[num]:
-        list_of_primes.append(num)
-        for i in range(num**2, n, num):
-            primes[i] = False
+# precompute list of prime numbers
 
-print(len(list_of_primes))
-print(list_of_primes[10000])
-print(list_of_primes)
+NUM_PRIMES = 150000
+is_prime = [True]*NUM_PRIMES
+is_prime[0] = False
+is_prime[1] = False
+
+primes = [2]
+
+for num in range(3, NUM_PRIMES+1, 2):
+    if is_prime[num]:
+        primes.append(num)
+        for i in range(num**2, NUM_PRIMES, num):
+            is_prime[i] = False
+
+
+def euler7(N: int) -> int:
+    return primes[N-1]
+
+n = int(input())
+for _ in range(n):
+    print(euler7(int(input())))
