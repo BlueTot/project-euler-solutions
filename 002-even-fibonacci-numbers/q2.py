@@ -1,6 +1,19 @@
-fib = [0, 1]
-total=0
-while fib[-1] < 4000000:
-    fib.append(num:=fib[-2]+fib[-1])
-    total += num if num % 2 == 0 else 0
-print(total)
+#!/bin/python3
+
+def euler2(N):
+
+    a, b = 1, 2
+    total = 2
+
+    while True:
+        a, b = b, a + b
+        if b > N:
+            break
+        total += b if b % 2 == 0 else 0
+
+    return total
+
+n = int(input())
+for _ in range(n):
+    print(euler2(int(input())))
+
