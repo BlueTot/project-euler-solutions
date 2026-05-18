@@ -1,21 +1,30 @@
-def is_palindrome(n):
-    front, rear = 0, len(n)-1
-    while True:
-        if n[front] != n[rear]:
-            return False
-        if front == rear or abs(front - rear) == 1:
-            return True
-        front += 1
-        rear -= 1
+#!/bin/python3
 
-def main():
-    largest = 1
-    for num1 in range(999, 99, -1):
-        for num2 in range(999, 99, -1):
-            p = num1 * num2
-            if is_palindrome(str(p)) and p > largest:
-                largest = p
-                print(p)
-    print(largest)
-            
-main()
+from bisect import bisect_left
+
+def is_palindrome(n: int) -> bool:
+    return str(n) == str(n)[::-1]
+
+# precompute all palindromic products and sort them
+
+palindromic_products = []
+for i in range(100, 1000):
+    for j in range(100, 1000):
+        p = i * j
+        if is_palindrome(p):
+            palindromic_products.append(p)
+
+palindromic_products.sort()
+
+def euler4(N: int) -> int:
+
+    # returns the index in the list where N is inserted
+    # first index where array[index] >= N
+    # we want < N so we subtract 1
+
+    index = bisect_left(palindromic_products, N)
+    return palindromic_products[index-1]
+
+n = int(input())
+for _ in range(n):
+    print(euler4(int(input())))
