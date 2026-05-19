@@ -1,32 +1,25 @@
-# start = (1, 0)
-# gridsize = 8
-# n = 0
-# def recurse(node):
-#     global n
-#     if node == (gridsize, gridsize):
-#         n += 2
-#         return
-#     for dx, dy in ((1, 0), (0, 1)):
-#         x = node[0] + dx
-#         y = node[1] + dy
-#         if 0 <= x <= gridsize and 0 <= y <= gridsize:
-#             recurse((x, y))
-# recurse(start)
-# print(n)
-
-#6
-#20
-#70
-#252
-#924
-#3432
-#12870
-
-from math import factorial
+#!/bin/python3
 
 from math import comb
 
-def ways(n):
-    return comb(n*2, n)
 
-print([ways(i) for i in  range(2, 21)])
+# we must make N vertical movements and M horizontal movements to get to the 
+# bottom right
+
+# there are (N+M)! ways to arrange everything
+# divide by N! * M! to account for rearrangements within the same movement type
+# since that doesn't make a difference
+
+# so formula is (N+M)!/(N! M!) = N+M choose N
+
+MOD = 10**9 + 7
+
+def euler15(N: int, M: int) -> int:
+    return comb(N+M, N) % MOD
+
+
+n = int(input())
+for _ in range(n):
+    N, M = list(map(int, input().split()))
+    print(euler15(N, M))
+
