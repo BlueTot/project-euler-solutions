@@ -1,2 +1,11 @@
+#!/bin/python3
+
 from math import factorial
-print(sum([int(char) for char in str(factorial(100))]))
+
+
+def euler20(N: int) -> int:
+    return sum([int(char) for char in str(factorial(N))])
+
+t = int(input())
+for _ in range(t):
+    print(euler20(int(input())))
